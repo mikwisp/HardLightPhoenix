@@ -19,20 +19,6 @@ public sealed class TargetSeekingSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<TargetSeekingComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<TargetSeekingComponent, ComponentInit>(OnComponentInit);
-    }
-
-    /// <summary>
-    /// Initialize the target seeking component with information about its origin grid.
-    /// </summary>
-    private void OnComponentInit(EntityUid uid, TargetSeekingComponent component, ComponentInit args)
-    {
-        if (TryComp<ProjectileComponent>(uid, out var projectile) &&
-            projectile.Shooter.HasValue &&
-            TryComp<TransformComponent>(projectile.Shooter.Value, out var shooterTransform))
-        {
-            component.OriginGridUid = shooterTransform.GridUid;
-        }
     }
 
     /// <summary>
@@ -110,18 +96,9 @@ public sealed class TargetSeekingSystem : EntitySystem
 
         while (shuttleQuery.MoveNext(out var targetUid, out _, out var targetXform))
         {
-            EntityUid effectiveTargetToConsider;
-            TransformComponent currentCandidateXform;
-
-            if (targetXform.GridUid.HasValue)
-            {
-                effectiveTargetToConsider = targetXform.GridUid.Value;
-                if (!TryComp<TransformComponent>(effectiveTargetToConsider, out var gridXform))
-                {
-                    continue;
-                }
-                currentCandidateXform = gridXform;
-            }
+            // If this entity has a grid UID, use that as our actual target
+            // This targets the ship grid rather than just the console
+            var actualTarget = targetXform.GridUid ?? targetUid;
             else
             {
                 effectiveTargetToConsider = targetUid;
@@ -153,6 +130,20 @@ public sealed class TargetSeekingSystem : EntitySystem
                 continue;
             }
 
+            // Skip if the target is our own launcher (don't target our own ship)
+            if (TryComp<ProjectileComponent>(uid, out var projectile) &&
+                TryComp<TransformComponent>(projectile.Shooter, out var shooterTransform))
+            {
+                var shooterGridUid = shooterTransform.GridUid;
+
+                // If the shooter is on the same grid as this potential target, skip it
+                if (targetXform.GridUid.HasValue && shooterGridUid == targetXform.GridUid)
+                {
+                    continue;
+                }
+            }
+
+            // If this is closer than our previous best target, update
             if (closestDistance > distance)
             {
                 closestDistance = distance;
