@@ -30,8 +30,9 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,0.5"
+    buckleSelfDoafterTime: 4.5 # people attempting to buckle to the borg will have a doafter
   - type: Sanitized
-  - type: Hands 
+  - type: Hands
   - type: Cuffable
   - type: ComplexInteraction
   - type: IntrinsicRadioTransmitter
