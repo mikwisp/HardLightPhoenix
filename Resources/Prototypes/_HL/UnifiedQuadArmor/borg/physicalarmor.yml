@@ -89,7 +89,7 @@
   description: Salvaged, Acquired, or otherwise procured; this set of armor is clearly designed for the heaviest duties, and most extreme environments. Lifting it is nearly impossible, with the near foot-thick plates of solid alloys and plates meant to deflect projectiles creaking with each motion.
   components:
   - type: Contraband
-    severity: Class3
+    severity: Class3Syndicate
   - type: Sprite
     sprite: _HL/Objects/BorgArmor/physarmor/borgheavyarmor.rsi
   - type: ExplosionResistance
