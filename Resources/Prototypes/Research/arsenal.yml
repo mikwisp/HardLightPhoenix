@@ -15,6 +15,7 @@
   - NFWeaponPka # Frontier: WeaponProtoKineticAccelerator<NFWeaponPka
   - ShuttleGunKineticCircuitboard
   #- ShuttleGunKineticCircuitboard
+  - ShuttleGunKineticCircuitboard
   - WeaponTurretM25Circuitboard # Mono
   # These are roundstart but not replenishable for salvage
   - WeaponCrusher
