@@ -537,6 +537,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             };
             shuttleStation = _station.InitializeNewStation(stationProto.Stations[vessel], gridUids);
             name = Name(shuttleUid); // Name the station to the shuttle's name
+            _metaData.SetEntityName(shuttleStation.Value, name);
 
             var vesselInfo = EnsureComp<ExtraShuttleInformationComponent>(shuttleStation.Value);
             vesselInfo.Vessel = vessel;
