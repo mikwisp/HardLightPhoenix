@@ -4,8 +4,8 @@ meta:
   engineVersion: 267.3.0
   forkId: ""
   forkVersion: ""
-  time: 11/29/2025 02:26:39
-  entityCount: 21047
+  time: 11/29/2025 02:37:44
+  entityCount: 21053
 maps:
 - 1
 grids:
@@ -7837,7 +7837,7 @@ entities:
       pos: -21.5,45.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -19264.145
+      secondsUntilStateChange: -19356.875
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8588,7 +8588,7 @@ entities:
       pos: -23.5,-12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -105578.6
+      secondsUntilStateChange: -105671.33
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8600,7 +8600,7 @@ entities:
       pos: -23.5,-13.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -105769
+      secondsUntilStateChange: -105861.73
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8633,7 +8633,7 @@ entities:
       pos: -23.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -97407.66
+      secondsUntilStateChange: -97500.38
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8718,7 +8718,7 @@ entities:
       pos: 21.5,-13.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -86798.1
+      secondsUntilStateChange: -86890.83
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8764,7 +8764,7 @@ entities:
       pos: 23.5,-5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -56768.8
+      secondsUntilStateChange: -56861.53
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -8998,7 +8998,7 @@ entities:
       pos: 20.5,17.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -56316.734
+      secondsUntilStateChange: -56409.465
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9739,7 +9739,7 @@ entities:
       pos: -23.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -13741.884
+      secondsUntilStateChange: -13834.614
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -13539,7 +13539,7 @@ entities:
   - uid: 17667
     components:
     - type: Transform
-      pos: -37.18861,41.832756
+      pos: -37.184895,42.881977
       parent: 2
 - proto: BoxFolderNfsdFormsBrown
   entities:
@@ -108893,7 +108893,7 @@ entities:
   - uid: 15717
     components:
     - type: Transform
-      pos: -37.50679,42.67971
+      pos: -37.747395,42.256977
       parent: 2
     - type: HandheldLight
       toggleActionEntity: 15718
@@ -109902,6 +109902,23 @@ entities:
       parent: 15434
     - type: Physics
       canCollide: False
+- proto: Magazine46x30mmSubMachineGunTopMountedFMJ
+  entities:
+  - uid: 21049
+    components:
+    - type: Transform
+      pos: -37.173347,42.022602
+      parent: 2
+  - uid: 21050
+    components:
+    - type: Transform
+      pos: -37.173347,41.850727
+      parent: 2
+  - uid: 21051
+    components:
+    - type: Transform
+      pos: -37.173347,41.647602
+      parent: 2
 - proto: Magazine556x45mmFMJ
   entities:
   - uid: 15460
@@ -129095,7 +129112,7 @@ entities:
   - uid: 15307
     components:
     - type: Transform
-      pos: -23.427778,43.66151
+      pos: -23.330576,43.889427
       parent: 2
 - proto: ToyHammer
   entities:
@@ -143171,10 +143188,22 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -36.5,16.5
       parent: 2
+  - uid: 15317
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -23.5,43.5
+      parent: 2
   - uid: 15355
     components:
     - type: Transform
       pos: -30.5,33.5
+      parent: 2
+  - uid: 21052
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -37.5,42.5
       parent: 2
 - proto: WeaponDisablerSMG
   entities:
@@ -143636,6 +143665,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: WeaponSubMachineGunWt550
+  entities:
+  - uid: 21048
+    components:
+    - type: Transform
+      pos: -37.313972,41.303852
+      parent: 2
 - proto: WeaponTurretM220
   entities:
   - uid: 20866
@@ -144136,17 +144172,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: -24.5,40.5
       parent: 2
-  - uid: 15317
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -23.5,42.5
-      parent: 2
   - uid: 15412
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -33.5,45.5
+      parent: 2
+  - uid: 21053
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -23.5,42.5
       parent: 2
 - proto: WindoorSecureChemistryLocked
   entities:
