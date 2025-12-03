@@ -19,7 +19,6 @@
       0: Alive
       200: Critical
       300: Dead
-  - type: TrapAvoider
 
 - type: entity
   id: CMXenoDeveloped
@@ -44,4 +43,3 @@
       0: Alive
       200: Critical
       300: Dead
-  - type: TrapAvoider

@@ -145,7 +145,6 @@
     - Plastic
     - Sheet
     - NoPaint
-    - TiderAnvilParts
   - type: Material
   - type: PhysicalComposition
     materialComposition:

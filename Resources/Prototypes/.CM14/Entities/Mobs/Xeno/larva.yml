@@ -3,7 +3,6 @@
   parent: CMXenoUndeveloped
   id: CMXenoLarva
   name: Larva
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     drawdepth: Mobs

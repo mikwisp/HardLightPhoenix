@@ -16,7 +16,6 @@
   <GuideEntityEmbed Entity="MobVox" Caption="Vox"/>
   <GuideEntityEmbed Entity="MobResomi" Caption="Resomi"/>
   <GuideEntityEmbed Entity="MobAvali" Caption="Avali"/>
-  <GuideEntityEmbed Entity="MobChitinid" Caption="Chitinid"/>
   </Box>
   # Frontier specific species
   <Box>

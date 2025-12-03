@@ -1,5 +1,4 @@
 ﻿using Content.Shared.Actions;
-using Content.Shared.CM14.Xenos;
 using Content.Shared.Mind;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -21,7 +20,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
-        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoOpenEvolutionsAction);
     }
 
     private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
@@ -29,10 +27,4 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
     }
 
-    private void OnXenoOpenEvolutionsAction(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
-    {
-        // Convert the action event to a component event and re-raise it
-        var ev = new XenoOpenEvolutionsEvent();
-        RaiseLocalEvent(ent.Owner, ev);
-    }
 }

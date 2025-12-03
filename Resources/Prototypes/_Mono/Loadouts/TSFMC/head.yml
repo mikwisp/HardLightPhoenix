@@ -1,9 +1,0 @@
-- type: loadout
-  id: TsfmcHelmet
-  equipment:
-    head: ClothingHeadHelmetMercenaryBlack
-
-- type: loadout
-  id: TsfmcBeret
-  equipment:
-    head: ClothingHeadHatBeretCommander

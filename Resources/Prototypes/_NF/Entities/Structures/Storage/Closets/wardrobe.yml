@@ -1,4 +1,4 @@
-# TSFMC/brig wardrobe
+# NFSD/brig wardrobe
 - type: entity
   id: NFWardrobePrison
   parent: WardrobeBase

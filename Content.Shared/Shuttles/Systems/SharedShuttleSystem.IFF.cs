@@ -1,7 +1,6 @@
-using Content.Shared._Mono.Company;
+using System.Linq;
 using Content.Shared.Shuttles.Components;
 using JetBrains.Annotations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Shuttles.Systems;
 
@@ -42,42 +41,10 @@ public abstract partial class SharedShuttleSystem
             return null;
         }
 
-        // Get the company information if available
-        Color? companyColor = null;
-        string? companyName = null;
+        // Frontier
+        var suffix = component != null ? GetServiceFlagsSuffix(component.ServiceFlags) : string.Empty;
 
-        if (TryComp<_Mono.Company.CompanyComponent>(gridUid, out var companyComp) && !string.IsNullOrEmpty(companyComp.CompanyName))
-        {
-            if (IoCManager.Resolve<IPrototypeManager>().TryIndex<CompanyPrototype>(companyComp.CompanyName, out var prototype))
-            {
-                // Don't include "None" companies in the IFF label
-                if (prototype.ID != "None")
-                {
-                    companyName = prototype.Name;
-                    companyColor = prototype.Color;
-                }
-            }
-            else
-            {
-                // For unknown companies, still check if it's not "None"
-                if (companyComp.CompanyName != "None")
-                {
-                    companyName = companyComp.CompanyName;
-                    companyColor = Color.Yellow;
-                }
-            }
-        }
-
-        var labelText = string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
-
-        // Add company info if available
-        if (companyName != null && companyColor != null)
-        {
-            // Return a formatted label that the client can parse properly
-            return $"{labelText}\n{companyName}";
-        }
-
-        return labelText;
+        return string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName + suffix;
     }
 
     /// <summary>

@@ -3,7 +3,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: XenoMeleeCombatCompound
+          task: MeleeCombatCompound
     - tasks:
         - !type:HTNCompoundTask
           task: IdleCompound

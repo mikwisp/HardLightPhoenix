@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadset
+  parent: ClothingHeadsetGrey
   id: ClothingHeadsetChameleon
   name: passenger headset
   description: An updated, modular intercom that fits over the head. Takes encryption keys.
@@ -18,5 +18,3 @@
       interfaces:
         enum.ChameleonUiKey.Key:
           type: ChameleonBoundUserInterface
-    - type: Item
-      size: Small

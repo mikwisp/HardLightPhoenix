@@ -1038,7 +1038,7 @@
 - type: entity
   id: NFPouchNfsd
   parent: NFPouchUtility
-  name: TSFMC pouch
+  name: Colsec pouch
   components:
   - type: Sprite
     layers:

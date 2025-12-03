@@ -119,8 +119,6 @@
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
-  - BluespaceBucket
-  - BluespaceBarrel
 
 - type: latheRecipePack
   id: MedicalBoards

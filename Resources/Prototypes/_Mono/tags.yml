@@ -357,11 +357,3 @@
 
 - type: Tag
   id: MPSSMMissile
-
-# DMR tags
-
-- type: Tag
-  id: CartridgeDMR
-
-- type: Tag
-  id: MagazineDMR

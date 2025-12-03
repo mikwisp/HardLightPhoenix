@@ -7,8 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
-        Structural: 50
+        Piercing: 40
     penetrationThreshold: 360
     penetrationDamageTypeRequirement:
     - Structural
@@ -30,9 +29,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
-        Heat: 10
-        Structural: 50
+        Piercing: 10
+        Heat: 8
+        Structural: 5
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -43,9 +42,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 15
         Heat: 25
-        Structural: 50
   - type: IgniteOnCollide
     fireStacks: 0.5
 
@@ -58,7 +56,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 7.5
         Caustic: 15
 
 - type: entity
@@ -84,8 +82,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
-        Cold: 30
+        Piercing: 7.5
+        Cold: 15
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -96,8 +94,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
-        Slash: 30
-        Blunt: 30
-        Heat: 30
-        Structural: 50
+        Piercing: 10
+        Slash: 15
+        Blunt: 15
+        Heat: 15

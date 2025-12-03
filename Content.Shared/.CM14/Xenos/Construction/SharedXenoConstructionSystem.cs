@@ -46,6 +46,7 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         // Secrete/build resin structure
         SubscribeLocalEvent<XenoComponent, XenoSecreteStructureEvent>(OnXenoSecreteStructureAction);
         SubscribeLocalEvent<XenoComponent, XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
+        SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
     }
 
     private void OnXenoPlantWeeds(Entity<XenoComponent> ent, ref XenoPlantWeedsEvent args)
@@ -57,6 +58,12 @@ public abstract class SharedXenoConstructionSystem : EntitySystem
         // On server, let the server-specific system handle it to avoid double-processing.
         if (_net.IsServer)
             return;
+    }
+
+    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored)
+            QueueDel(ent);
     }
 
     protected virtual void OnXenoChooseStructureAction(Entity<XenoComponent> xeno, ref XenoChooseStructureActionEvent args)

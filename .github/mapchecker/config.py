@@ -4,8 +4,13 @@ ILLEGAL_MATCHES = [
     "DoNotMap",
     "DEBUG",
     "Admeme",
+    "CaptainSabre",
+    "ClothingBeltSheath",
+    "MagazinePistolHighCapacity",
+    "MagazinePistolHighCapacityRubber",
     "EncryptionKeyCommand",
     "SurveillanceCameraWireless",
+    "CrewMonitoringServer",
     "APCHighCapacity",
     "APCSuperCapacity",
     "APCHyperCapacity",
@@ -31,20 +36,30 @@ CONDITIONALLY_ILLEGAL_MATCHES = {
     ],
     "Custom": [
     ],
-    "Security": [
+    "Security": [  # These matchers are illegal unless the ship is part of the security shipyard.
+        "Security",  # Anything with the word security in it should also only be appearing on security ships.
+        "Plastitanium",  # Plastitanium walls should only be appearing on security ships.
+        "Kammerer", # Opportunity
+        "HighSecDoor",
+        "ShuttleGun",
     ],
     "Syndicate": [
+        "Plastitanium",  # And also on blackmarket ships cause syndicate.
+        "ShuttleGun",
     ],
     "BlackMarket": [
+        "Plastitanium",  # And also on blackmarket ships cause syndicate.
+        "ShuttleGun",
     ],
     "Sr": [
     ],
     "Medical": [
     ],
-    "Ussp": [
-    ],
     # It is assumed that mapped instances of plastitanium, security gear, etc. are deemed acceptable
     "PointOfInterest": [
+        "Plastitanium",
+        "Security",
+        "HighSecDoor",
         "WallPlastitaniumIndestructible",
         "WallPlastitaniumDiagonalIndestructible",
         "PlastititaniumWindowIndestructible",

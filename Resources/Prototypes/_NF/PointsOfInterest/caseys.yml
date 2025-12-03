@@ -12,7 +12,7 @@
   id: CaseysCasino
   parent: BasePOI
   name: "Crazy Casey's Casino"
-  minimumDistance: 4250
+  minimumDistance: 3250
   maximumDistance: 5600
   gridPath: /Maps/_NF/POI/caseyscasino.yml
   addComponents:

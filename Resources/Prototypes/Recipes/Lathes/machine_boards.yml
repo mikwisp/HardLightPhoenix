@@ -320,11 +320,6 @@
   id: FatExtractorMachineCircuitboard
   result: FatExtractorMachineCircuitboard
 
-- type: latheRecipe
-  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
-  id: SlopDispenserMachineCircuitboard
-  result: SlopDispenserMachineCircuitboard
-
 ## Supply
 
 - type: latheRecipe

@@ -16,7 +16,6 @@
     - Sheet
     - Metal
     - NoPaint
-    - TiderAnvilParts
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

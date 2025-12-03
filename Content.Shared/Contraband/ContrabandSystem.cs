@@ -1,3 +1,4 @@
+﻿using System.Linq;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
@@ -7,7 +8,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Shared.Contraband;
 
@@ -38,11 +38,15 @@ public sealed class ContrabandSystem : EntitySystem
 
         contraband.Severity = other.Severity;
         contraband.AllowedDepartments = other.AllowedDepartments;
+        contraband.AllowedDepartments = other.AllowedDepartments;
         contraband.AllowedJobs = other.AllowedJobs;
+        contraband.TurnInValues = other.TurnInValues; // Frontier
+        contraband.HideValues = other.HideValues; // Frontier
+        contraband.HideCarryStatus = other.HideCarryStatus; // Frontier
         Dirty(uid, contraband);
     }
 
-    private void OnDetailedExamine(EntityUid ent, ContrabandComponent component, ref GetVerbsEvent<ExamineVerb> args)
+    private void OnDetailedExamine(EntityUid ent,ContrabandComponent component, ref GetVerbsEvent<ExamineVerb> args)
     {
 
         if (!_contrabandExamineEnabled)
@@ -52,21 +56,30 @@ public sealed class ContrabandSystem : EntitySystem
         if (!args.CanInteract)
             return;
 
+        if (component.HideValues) // Frontier: allow selective display
+            return; // Frontier: allow selective display
+
         // two strings:
         // one, the actual informative 'this is restricted'
         // then, the 'you can/shouldn't carry this around' based on the ID the user is wearing
+        var localizedDepartments = component.AllowedDepartments.Select(p => Loc.GetString("contraband-department-plural", ("department", Loc.GetString(_proto.Index(p).Name))));
+        var jobs = component.AllowedJobs.Select(p => _proto.Index(p).LocalizedName).ToArray();
+        var localizedJobs = jobs.Select(p => Loc.GetString("contraband-job-plural", ("job", p)));
         var severity = _proto.Index(component.Severity);
-        String departmentExamineMessage;
+        String? departmentExamineMessage = null;
         if (severity.ShowDepartmentsAndJobs)
         {
+            //creating a combined list of jobs and departments for the restricted text
+            var list = ContentLocalizationManager.FormatList(localizedDepartments.Concat(localizedJobs).ToList());
             // department restricted text
-            departmentExamineMessage =
-                GenerateDepartmentExamineMessage(component.AllowedDepartments, component.AllowedJobs);
+            departmentExamineMessage = Loc.GetString("contraband-examine-text-Restricted-department", ("departments", list));
         }
-        else
-        {
-            departmentExamineMessage = Loc.GetString(severity.ExamineText);
-        }
+        // Frontier: keep department and severity separate
+        // else
+        // {
+        //     departmentExamineMessage = Loc.GetString(severity.ExamineText);
+        // }
+        // End Frontier: keep department and severity separate
 
         // text based on ID card
         List<ProtoId<DepartmentPrototype>> departments = new();
@@ -80,7 +93,6 @@ public sealed class ContrabandSystem : EntitySystem
             }
         }
 
-        var jobs = component.AllowedJobs.Select(p => _proto.Index(p).LocalizedName).ToArray();
         // if it is fully restricted, you're department-less, or your department isn't in the allowed list, you cannot carry it. Otherwise, you can.
         var carryingMessage = Loc.GetString("contraband-examine-text-avoid-carrying-around");
         var iconTexture = "/Textures/Interface/VerbIcons/lock-red.svg.192dpi.png";
@@ -90,7 +102,8 @@ public sealed class ContrabandSystem : EntitySystem
             carryingMessage = Loc.GetString("contraband-examine-text-in-the-clear");
             iconTexture = "/Textures/Interface/VerbIcons/unlock-green.svg.192dpi.png";
         }
-        var examineMarkup = GetContrabandExamine(departmentExamineMessage, carryingMessage);
+
+        var examineMarkup = GetContrabandExamine(Loc.GetString(severity.ExamineText), departmentExamineMessage, component.HideCarryStatus ? null : carryingMessage); // Frontier: add severity examine text, pass HideCarryStatus
         _examine.AddHoverExamineVerb(args,
             component,
             Loc.GetString("contraband-examinable-verb-text"),
@@ -98,25 +111,23 @@ public sealed class ContrabandSystem : EntitySystem
             iconTexture);
     }
 
-    public string GenerateDepartmentExamineMessage(HashSet<ProtoId<DepartmentPrototype>> allowedDepartments, HashSet<ProtoId<JobPrototype>> allowedJobs, ContrabandItemType itemType = ContrabandItemType.Item)
-    {
-        var localizedDepartments = allowedDepartments.Select(p => Loc.GetString("contraband-department-plural", ("department", Loc.GetString(_proto.Index(p).Name))));
-        var jobs = allowedJobs.Select(p => _proto.Index(p).LocalizedName).ToArray();
-        var localizedJobs = jobs.Select(p => Loc.GetString("contraband-job-plural", ("job", p)));
-
-        //creating a combined list of jobs and departments for the restricted text
-        var list = ContentLocalizationManager.FormatList(localizedDepartments.Concat(localizedJobs).ToList());
-
-        // department restricted text
-        return Loc.GetString("contraband-examine-text-Restricted-department", ("departments", list), ("type", itemType));
-    }
-
-    private FormattedMessage GetContrabandExamine(String deptMessage, String carryMessage)
+    private FormattedMessage GetContrabandExamine(String severity, String? deptMessage, String? carryMessage) // Frontier: add severity, optional deptMessage
     {
         var msg = new FormattedMessage();
-        msg.AddMarkupOrThrow(deptMessage);
-        msg.PushNewline();
-        msg.AddMarkupOrThrow(carryMessage);
+
+        // Frontier: severity, department message, hide carry status
+        msg.AddMarkupOrThrow(severity);
+        if (!string.IsNullOrEmpty(deptMessage))
+        {
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(deptMessage);
+        }
+        if (!string.IsNullOrEmpty(carryMessage))
+        {
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(carryMessage);
+        }
+        // End Frontier: severity, department message, hide carry status
         return msg;
     }
 
@@ -124,13 +135,4 @@ public sealed class ContrabandSystem : EntitySystem
     {
         _contrabandExamineEnabled = val;
     }
-}
-
-/// <summary>
-/// The item type that the contraband text should follow in the description text.
-/// </summary>
-public enum ContrabandItemType
-{
-    Item,
-    Reagent
 }

@@ -2,7 +2,6 @@
   parent: CMXenoDeveloped
   id: CMXenoDrone
   name: Drone
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     drawdepth: Mobs

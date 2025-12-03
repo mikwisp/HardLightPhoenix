@@ -27,7 +27,6 @@
     - id: MailTeleporterMachineCircuitboard
     - id: ClothingBeltUtilityEngineering
     - id: QuartermasterIDCard
-    - id: ClothingOuterHardsuitLuxmax
 
 - type: entity
   id: HLLockerQuarterMasterFilled

@@ -8,13 +8,17 @@
   - type: ContainerContainer
     containers:
       key_slots: !type:Container
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
   - type: Headset
   - type: EncryptionKeyHolder
     keySlots: 10 # Frontier 4<10
   - type: Sprite
     state: icon
   - type: Item
-    size: Ginormous
+    size: Small
   - type: Clothing
     slots:
     - ears
@@ -28,10 +32,6 @@
   id: ClothingHeadsetGrey
   name: passenger headset
   components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - EncryptionKeyCommon
   - type: Sprite
     sprite: Clothing/Ears/Headsets/base.rsi
 
@@ -76,10 +76,10 @@
       - EncryptionKeyCommon
 
 - type: entity
-  parent: [ ClothingHeadset, BaseCentcommContraband ]
-  id: ClothingHeadsetCentCom
-  name: CentComm headset
-  description: A headset used by the upper echelons of the Trans-Solar Federation.
+  parent: [ ClothingHeadset, BaseColcommCommandContraband ] # Frontier: Added BaseColcommCommandContraband, removed BaseColcommContraband.
+  id: ClothingHeadsetColCom
+  name: ColComm headset
+  description: A headset used by the upper echelons of Nanotrasen.
   components:
   - type: ContainerFill
     containers:

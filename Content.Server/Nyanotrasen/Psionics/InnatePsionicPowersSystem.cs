@@ -1,6 +1,4 @@
 using Content.Shared.Nyanotrasen.Abilities.Psionics.Components;
-using Content.Shared.Abilities.Psionics;
-using Content.Server.Abilities.Psionics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -8,10 +6,8 @@ namespace Content.Server.Nyanotrasen.Psionics
 {
     public sealed class InnatePsionicPowersSystem : EntitySystem
     {
+        [Dependency] private readonly IComponentFactory _componentFactory = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
-        // Use the existing psionic abilities system to add powers properly (avoids deprecated component name heuristic).
-        [Dependency] private readonly PsionicAbilitiesSystem _psionic = default!;
 
         public override void Initialize()
         {
@@ -21,22 +17,24 @@ namespace Content.Server.Nyanotrasen.Psionics
 
         private void OnStartup(EntityUid uid, InnatePsionicPowersComponent component, ComponentStartup args)
         {
-            // Ensure base psionic component exists.
-            EnsureComp<Content.Shared.Abilities.Psionics.PsionicComponent>(uid, out var psionicComp);
-
-            foreach (var powerId in component.PowersToAdd)
+            foreach (var powerName in component.PowersToAdd)
             {
-                if (!_prototypeManager.TryIndex<PsionicPowerPrototype>(powerId, out var proto))
-                {
-                    Logger.Error($"[InnatePsionics] Unknown psionic power prototype '{powerId}' on entity {uid}");
-                    continue;
-                }
+                // Convert power name to component name (e.g., "TelepathyPower" becomes "TelepathyPowerComponent")
+                var componentName = powerName.EndsWith("Component") ? powerName : powerName + "Component";
 
-                // Initialize via central system (handles actions, components, stats, duplicate checks).
-                _psionic.InitializePsionicPower(uid, proto, psionicComp, playFeedback: false);
+                try
+                {
+                    var powerComponent = _componentFactory.GetComponent(componentName);
+                    powerComponent.Owner = uid;
+                    EntityManager.AddComponent(uid, powerComponent);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Failed to add innate psionic power {powerName} to entity {uid}: {ex.Message}");
+                }
             }
 
-            // Remove marker component to prevent duplicate initialization.
+            // Remove this component after adding powers to prevent re-adding on respawn
             RemComp<InnatePsionicPowersComponent>(uid);
         }
     }

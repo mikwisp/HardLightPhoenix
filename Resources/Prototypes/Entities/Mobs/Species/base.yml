@@ -237,7 +237,6 @@
   - type: Targeting # Shitmed Change
   - type: SurgeryTarget # Shitmed Change
   - type: ModifyMarkings # Hardlight
-  - type: ExaminableCharacter # WWDP
 
 - type: entity
   save: false
