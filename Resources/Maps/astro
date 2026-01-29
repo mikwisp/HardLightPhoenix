@@ -4,7 +4,7 @@ meta:
   engineVersion: 267.3.0
   forkId: ""
   forkVersion: ""
-  time: 01/29/2026 02:33:01
+  time: 01/29/2026 02:33:04
   entityCount: 11194
 maps:
 - 1
@@ -5345,7 +5345,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -16236.101
+      secondsUntilStateChange: -16238.477
       state: Opening
   - uid: 6735
     components:
@@ -5456,7 +5456,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -14099.502
+      secondsUntilStateChange: -14101.878
       state: Opening
   - uid: 10825
     components:
@@ -54853,7 +54853,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -41184.914
+      secondsUntilStateChange: -41187.293
       state: Opening
     - type: Airlock
       autoClose: False
@@ -71420,7 +71420,7 @@ entities:
       pos: 6.5,23.5
       parent: 107
     - type: Door
-      secondsUntilStateChange: -32358.396
+      secondsUntilStateChange: -32360.773
       state: Opening
 - proto: WoodenSupportBeam
   entities:
