@@ -1,8 +1,8 @@
 - type: reagent
-  id: PomegranteJuice
-  name: reagent-name-PomegranteJuice
+  id: Pomelustine
+  name: reagent-name-pomelustine
   group: Medicine
-  desc: reagent-desc-PomegranteJuice
+  desc: reagent-desc-pomelustine
   physicalDesc: reagent-physical-desc-sticky
   flavor: fruity
   color: "#45072f"

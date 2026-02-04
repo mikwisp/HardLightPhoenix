@@ -28,7 +28,7 @@
       - !type:SatiateThirst
         factor: 1
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.5
       - !type:AdjustReagent
         reagent: Ethanol
@@ -54,7 +54,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.25
 
 - type: reagent
@@ -95,6 +95,55 @@
         factor: 3
 
 - type: reagent
+  id: NikkosCumLust
+  name: reagent-name-nikkoscumlust
+  parent: BaseAlcohol
+  desc: reagent-desc-nikkoscumlust
+  physicalDesc: reagent-physical-desc-gloopy
+  flavor: nikkoscumlust
+  color: "#c977b5"
+  metamorphicSprite:
+   sprite: _Floof/Objects/Consumable/Drinks/nikkoscumlust.rsi
+   state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+      - !type:AdjustReagent
+        reagent: Pomelustine
+        amount: 0.5
+
+- type: reagent
+  id: NikkosSluttyCumLust
+  name: reagent-name-nikkossluttycumlust
+  parent: BaseAlcohol
+  desc: reagent-desc-nikkossluttycumlust
+  physicalDesc: reagent-physical-desc-gloopy
+  flavor: nikkossluttycumlust
+  color: "#c977b5"
+  metamorphicSprite:
+    sprite: _Floof/Objects/Consumable/Drinks/nikkossluttycumlust.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+      - !type:AdjustReagent
+        reagent: Pomelustine
+        amount: 0.5
+      - !type:AdjustReagent
+        reagent: Philterex
+        amount: 0.5
+
+- type: reagent
   id: BandE
   name: reagent-name-bande
   parent: BaseAlcohol
@@ -116,6 +165,32 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.108
+
+- type: reagent
+  id: BlueBaller
+  name: reagent-name-blueballer
+  parent: BaseAlcohol
+  desc: reagent-desc-blueballer
+  physicalDesc: reagent-physical-desc-tropical
+  flavor: blueballer
+  color: "#88065b"
+  metamorphicSprite:
+    sprite: _Floof/Objects/Consumable/Drinks/blueballer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.0415
+      - !type:AdjustReagent
+        reagent: Pomelustine
+        amount: 0.5
 
 - type: reagent
   id: CafeDeCacao
@@ -228,6 +303,32 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.055
+
+- type: reagent
+  id: DemonSeed
+  name: reagent-name-demonseed
+  parent: BaseAlcohol
+  desc: reagent-desc-demonseed
+  physicalDesc: reagent-physical-desc-gloopy
+  flavor: demonseed
+  color: "#301637"
+  metamorphicSprite:
+    sprite: _Floof/Objects/Consumable/Drinks/demonseed.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.0415
+      - !type:AdjustReagent
+        reagent: Pomelustine
+        amount: 1
 
 - type: reagent
   id: DirtyWastelander
@@ -450,7 +551,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.25
 
 - type: reagent
@@ -565,7 +666,7 @@
         - !type:OrganType
           type: Moth # non-moths get standard effect
           shouldHave: false
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.25
       - !type:AdjustReagent
         conditions:
@@ -620,7 +721,7 @@
         reagent: Ethanol
         amount: 0.0365
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.5
 
 - type: reagent
@@ -834,7 +935,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.25
 
 - type: reagent
@@ -923,7 +1024,7 @@
         reagent: Ethanol
         amount: 0.03
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.25
 
 
@@ -1113,7 +1214,7 @@
       - !type:SatiateThirst
         factor: 3
       - !type:AdjustReagent
-        reagent: PomegranteJuice
+        reagent: Pomelustine
         amount: 0.025
 
 - type: reagent
