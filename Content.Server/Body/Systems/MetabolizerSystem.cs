@@ -10,7 +10,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Server.Mobs.Components; // HardLight
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -206,25 +205,16 @@ namespace Content.Server.Body.Systems
 
                     float scale = (float) mostToRemove / (float) rate;
 
-                    // HardLight start: Check if the entity is a Synth and scale effects accordingly when dead
-                    var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
-                    var isSynth = HasComp<HLSynthComponent>(actualEntity);
-
                     // if it's possible for them to be dead, and they are,
-                    // then we shouldn't process any effects (unless they're a synth),
-                    // but should probably still remove reagents
-                    var isDead = false;
-                    if (TryComp<MobStateComponent>(actualEntity, out var state))
+                    // then we shouldn't process any effects, but should probably
+                    // still remove reagents
+                    if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
                     {
-                        isDead = _mobStateSystem.IsDead(actualEntity, state);
-                        if (!proto.WorksOnTheDead && !isSynth && isDead)
+                        if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
                             continue;
                     }
 
-                    if (isSynth && isDead && !proto.WorksOnTheDead)
-                        scale *= 0.75f;
-                    // HardLight end
-
+                    var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
                     var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale);
 
                     // do all effects, if conditions apply

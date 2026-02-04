@@ -15,9 +15,6 @@
   parent: EnergyDomeGeneratorPersonalSyndie
   suffix: Venom, Admin
   components:
-  - type: Tag
-    tags:
-    - Admin
   - type: Item
     size: Tiny
   - type: Clothing
@@ -46,9 +43,6 @@
   description: Venom's custom energy revolver. Sharp-smelling - Handle with care.
   suffix: Venom, Admin
   components:
-  - type: Tag
-    tags:
-    - Admin
   - type: ProjectileBatteryAmmoProvider
     proto: BulletSnakebiteVenom
     fireCost: 300
@@ -122,9 +116,6 @@
   description: A gas grenade that releases a dangerous, toxic cloud of smoke when used. Has black bands around the top and bottom.
   suffix: Venom, Admin
   components:
-  - type: Tag
-    tags:
-    - Admin
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger
@@ -154,9 +145,6 @@
   description: A gas grenade that releases a dangerous, toxic cloud of smoke when used. Has red bands around the top and bottom.
   suffix: Venom, Admin
   components:
-  - type: Tag
-    tags:
-    - Admin
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger
@@ -176,9 +164,6 @@
   description: A gas grenade that releases a dangerous, toxic cloud of smoke when used. Has blue bands around the top and bottom.
   suffix: Venom, Admin
   components:
-  - type: Tag
-    tags:
-    - Admin
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
   - type: SmokeOnTrigger

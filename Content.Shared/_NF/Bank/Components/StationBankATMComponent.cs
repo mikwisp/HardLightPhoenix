@@ -43,7 +43,6 @@ public enum SectorBankAccount : byte
     Service,
     Frontier,
     Nfsd,
-    ColSec, // HardLight
     Medical,
 }
 
@@ -58,7 +57,6 @@ public static class SectorBankAccountMapping
         { SectorBankAccount.Service, "Service" },
         { SectorBankAccount.Frontier, "Frontier" },
         { SectorBankAccount.Nfsd, "Nfsd" },
-        { SectorBankAccount.ColSec, "ColSec" }, // HardLight
         { SectorBankAccount.Medical, "Medical" },
     };
 

@@ -20,7 +20,6 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
     public event Action<MapCoordinates, Angle>? RequestFTL;
     public event Action<NetEntity, Angle>? RequestBeaconFTL;
     public event Action<NetEntity, Angle>? RequestStationFTL;
-    public event Action? ActivateExpeditionDisk;
 
     public event Action<NetEntity, NetEntity>? DockRequest;
     public event Action<NetEntity>? UndockRequest;
@@ -69,8 +68,6 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         {
             UndockRequest?.Invoke(entity);
         };
-
-        NavContainer.ActivateExpeditionDisk += () => ActivateExpeditionDisk?.Invoke();
 
         NfInitialize(); // Frontier Initialization for the ShuttleConsoleWindow
     }
@@ -153,7 +150,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         MapContainer.SetShuttle(coordinates?.EntityId);
         MapContainer.SetConsole(owner);
 
-        NavContainer.UpdateState(cState.NavState, cState.ExpeditionDiskState);
+        NavContainer.UpdateState(cState.NavState);
         MapContainer.UpdateState(cState.MapState);
         DockContainer.UpdateState(coordinates?.EntityId, cState.DockState);
     }

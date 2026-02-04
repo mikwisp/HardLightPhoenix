@@ -2,10 +2,8 @@ using Content.Server.Botany.Components;
 using Content.Server.Construction;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Stack;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Stacks;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -16,7 +14,6 @@ public sealed class SeedExtractorSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly BotanySystem _botanySystem = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
 
     public override void Initialize()
     {
@@ -43,12 +40,10 @@ public sealed class SeedExtractorSystem : EntitySystem
         _popupSystem.PopupCursor(Loc.GetString("seed-extractor-component-interact-message", ("name", args.Used)),
             args.User, PopupType.Medium);
 
-        var stackCount = 1;
-        if (TryComp<StackComponent>(args.Used, out var stack))
-            stackCount = stack.Count;
+        QueueDel(args.Used);
+        args.Handled = true;
 
-        var amountPerProduce = (int) _random.NextFloat(seedExtractor.BaseMinSeeds, seedExtractor.BaseMaxSeeds + 1) * seedExtractor.SeedAmountMultiplier;
-        var amount = amountPerProduce * stackCount;
+        var amount = (int) _random.NextFloat(seedExtractor.BaseMinSeeds, seedExtractor.BaseMaxSeeds + 1) * seedExtractor.SeedAmountMultiplier;
         var coords = Transform(uid).Coordinates;
 
         var packetSeed = seed;
@@ -67,13 +62,6 @@ public sealed class SeedExtractorSystem : EntitySystem
                 ownerComp.Owner = actor.PlayerSession.UserId;
             }
         }
-
-        if (stackCount > 1 && stack != null)
-            _stackSystem.SetCount(args.Used, stack.Count - stackCount, stack);
-        else
-            QueueDel(args.Used);
-
-        args.Handled = true;
     }
 
     private void OnRefreshParts(EntityUid uid, SeedExtractorComponent seedExtractor, RefreshPartsEvent args)

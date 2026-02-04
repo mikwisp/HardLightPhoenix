@@ -11,7 +11,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._NF.Worldgen.Components.Debris; // Frontier
-using Content.Server._NF.Shuttles.Components;
 
 namespace Content.Server.Worldgen.Systems.Debris;
 
@@ -229,8 +228,6 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
             var owned = EnsureComp<OwnedDebrisComponent>(ent);
             owned.OwningController = uid;
             owned.LastKey = point;
-
-            EnsureComp<ForceAnchorComponent>(ent);
 
             EnsureComp<SpaceDebrisComponent>(ent); // Frontier
             spawned++;
