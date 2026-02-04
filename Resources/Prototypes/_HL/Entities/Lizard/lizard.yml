@@ -5,6 +5,7 @@
   description: eats Wawas
   abstract: true
   components:
+  - type: LizardCombatSprite
   - type: Sprite
     sprite: _HL/Lizard/lizard.rsi
     state: lizardheadclosed
@@ -97,7 +98,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 1000 #Density is not final, adjust accordingly if the number of tail segments is reduced or increased
+        density: 10000 #Density is not final, adjust accordingly if the number of tail segments is reduced or increased
         restitution: 0.0
         mask:
         - MobMask
@@ -109,8 +110,7 @@
     staticScale: 0.6
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: bluesegment
+    texturePath: /Textures/_HL/Lizard/bluesegment.png
     shaderId: unshaded
 
 - type: entity
@@ -118,6 +118,9 @@
   parent: BlueRainLizard
   name: hostile Blue Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -180,8 +183,7 @@
     segmentId: greenRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: greensegment
+    texturePath: /Textures/_HL/Lizard/greensegment.png
     shaderId: unshaded
 
 - type: entity
@@ -189,6 +191,9 @@
   parent: GreenRainLizard
   name: hostile Green Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -251,8 +256,7 @@
     segmentId: greenRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: pinksegment
+    texturePath: /Textures/_HL/Lizard/pinksegment.png
     shaderId: unshaded
 
 - type: entity
@@ -260,6 +264,9 @@
   parent: PinkRainLizard
   name: hostile Pink Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -322,8 +329,7 @@
     segmentId: greenRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: segment
+    texturePath: /Textures/_HL/Lizard/segment.png
     shaderId: unshaded
   - type: Stealth
     enabledOnDeath: false
@@ -337,6 +343,9 @@
   parent: WhiteRainLizard
   name: hostile White Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -375,6 +384,8 @@
   - type: SlowOnDamage
     speedModifierThresholds:
       120: 0.5
+  - type: BluespaceShunt
+    cooldownTime: 1
   - type: Stamina
     critThreshold: 100
   - type: MeleeWeapon
@@ -399,8 +410,7 @@
     segmentId: greenRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: backcyansegment
+    texturePath: /Textures/_HL/Lizard/backcyansegment.png
     shaderId: unshaded
 
 - type: entity
@@ -408,6 +418,9 @@
   parent: CyanRainLizard
   name: hostile Cyan Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -470,8 +483,7 @@
     segmentId: RedRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: redsegment
+    texturePath: /Textures/_HL/Lizard/redsegment.png
     shaderId: unshaded
 
 - type: entity
@@ -479,6 +491,9 @@
   parent: RedRainLizard
   name: hostile Red Rain Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard
@@ -531,18 +546,17 @@
         Slash: 15
   - type: MovementSpeedModifier
     baseWalkSpeed: 4
-    baseSprintSpeed: 5.5
+    baseSprintSpeed: 7
   - type: SegmentedEntity
     numberOfSegments: 3
     initialRadius: 0.8
-    staticOffset: 5
+    staticOffset: 1.8
     staticScale: 0.9
     initialSegmentId: RedRainLizardInitialSegment
     segmentId: RedRainLizardSegment
     useTaperSystem: true
     taperOffset: 3
-    texturePath: _HL/Lizard/lizard.rsi
-    textureState: trainsegment
+    texturePath: /Textures/_HL/Lizard/trainsegment.png
     shaderId: unshaded
 
 - type: entity
@@ -550,6 +564,9 @@
   parent: TrainRainLizard
   name: hostile Train Lizard
   components:
+  - type: HTN
+    rootTask:
+      task: LizardPullAttackCompound
   - type: NpcFactionMember
     factions:
     - AgressiveLizard

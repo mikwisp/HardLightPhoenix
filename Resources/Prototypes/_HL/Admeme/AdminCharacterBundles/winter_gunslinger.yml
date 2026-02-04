@@ -38,6 +38,9 @@
   description: A single-action revolver. Hammer fanning lets a skilled user penetrate multiple target in quick succession. Loads 6 rounds of .45 magnum.
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: Gun
     angleDecay: 1
     fireRate: 8
@@ -52,11 +55,14 @@
   description: This hat ain't big enough for the both of us.
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   # we parent the base in order to remove the AddAccentClothing component
-    - type: Sprite
-      sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
-    - type: Clothing
-      sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
+  - type: Sprite
+    sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
 
 # neck
 # - type: entity
@@ -84,6 +90,9 @@
   description: A highly effective pair of black sunglasses.
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: EyeProtection
     protectionTime: 10
   - type: ShowHealthBars
@@ -133,6 +142,9 @@
   description: A thick, well-worn leather jacket. The seams are sewn with a type III heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent.
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: Armor  # armor values copied from the bulletproof vest
     modifiers:
       coefficients:
@@ -176,6 +188,9 @@
   # description:
   suffix: Winter, Filled
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: StorageFill
     contents:
       - id: SpeedLoader45_magnumFMJ
@@ -189,6 +204,9 @@
   # description:
   suffix: Winter, Filled
   components:
+  - type: Tag
+    tags:
+    - Admin
   # - type: ExplosionResistance
     # damageCoefficient: 0.5
   - type: StorageFill
@@ -210,6 +228,9 @@
   # description:
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: CartridgeLoader
     preinstalled:
       - CrewManifestCartridge
@@ -248,44 +269,54 @@
   # description:
   suffix: Winter, Admin
   components:
+  - type: Tag
+    tags:
+    - Admin
   - type: Item
     size: Small
   - type: ActivatableUI
     inHandsOnly: false
     requireActiveHand: false
-# phoenix Edit
-# - type: entity
-#   id: LewdFleshlightRedWinter
-#   parent: LewdFleshlightRed
-#   name: Winter
-#   suffix: Winter, Admin
-#   categories: [ HideSpawnMenu ]
-#   components:
-#   - type: SolutionContainerManager
-#     solutions:
-#       fleshlight:
-#         maxVol: 300
-#         reagents:
-#           - ReagentId: Cum
-#             Quantity: 300
 
-#Phoenix edit
-# # hand duffel
-# - type: entity
-#   id: NFClothingBackpackDuffelColorBrownWinterFilled
-#   parent: NFClothingBackpackDuffelColorBrown
-#   # name:
-#   # description:
-#   suffix: Winter, Filled
-#   components:
-#   - type: StorageFill
-#     contents:
-#       - id: AmmoBox45_magnumFMJ
-#         amount: 8
-#       - id: DrinkPomonadeGlass
-#       - id: BoxDispenserFlare
-#       - id: MedicatedSuture
-#       - id: RegenerativeMesh
-#       - id: DiphenhydramineVialBluespace
-#       - id: Syringe
-#       - id: LewdFleshlightRedWinter
+
+- type: entity
+  id: LewdFleshlightRedWinter
+  parent: LewdFleshlightRed
+  name: Winter
+  suffix: Winter, Admin
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tag
+    tags:
+    - Admin
+  - type: SolutionContainerManager
+    solutions:
+      fleshlight:
+        maxVol: 300
+        reagents:
+          - ReagentId: Cum
+            Quantity: 300
+
+
+# hand duffel
+- type: entity
+  id: NFClothingBackpackDuffelColorBrownWinterFilled
+  parent: NFClothingBackpackDuffelColorBrown
+  # name:
+  # description:
+  suffix: Winter, Filled
+  components:
+  - type: Tag
+    tags:
+    - Admin
+  - type: StorageFill
+    contents:
+      - id: AmmoBox45_magnumFMJ
+        amount: 8
+      - id: DrinkPomonadeGlass
+      - id: BoxDispenserFlare
+      - id: MedicatedSuture
+      - id: RegenerativeMesh
+      - id: DiphenhydramineVialBluespace
+      - id: Syringe
+      - id: LewdFleshlightRedWinter
