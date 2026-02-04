@@ -197,9 +197,6 @@
     # - Xeno
     # understands:
     # - Xeno
-  # - type: Vore # Floofstation - Vore
-    # canVore: true
-    # canBeVored: false
   - type: NightVision
     state: On
   - type: PotentialPsionic #Nyano - Summary: makes potentially psionic.

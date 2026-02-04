@@ -28,17 +28,10 @@ public sealed partial class SegmentedEntityComponent : Component
     public float InitialRadius = 0.3f;
 
     /// <summary>
-    ///     Texture of the segment. Can be either a direct texture path or an RSI path (when used with TextureState).
+    ///     Texture of the segment.
     /// </summary>
     [DataField(required: true)]
     public string TexturePath;
-
-    /// <summary>
-    ///     Optional RSI state name to use from the RSI specified in TexturePath.
-    ///     If specified, TexturePath should point to an RSI, not a direct texture.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public string? TextureState;
 
     /// <summary>
     ///     Optional shader prototype ID to apply when rendering the texture from <see cref="TexturePath"/>.

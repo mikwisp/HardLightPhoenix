@@ -14,6 +14,8 @@ using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+//using Content.Shared.FloofStation;
+using Robust.Shared.Containers;
 
 namespace Content.Server.Medical
 {
@@ -35,6 +37,7 @@ namespace Content.Server.Medical
 
         private readonly SoundSpecifier _vomitSound = new SoundCollectionSpecifier(VomitCollection,
             AudioParams.Default.WithVariation(0.2f).WithVolume(-4f));
+        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
         /// <summary>
         /// Make an entity vomit, if they have a stomach.
