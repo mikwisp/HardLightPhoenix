@@ -2,7 +2,6 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Botany.Components;
 using Content.Server.Kitchen.Components;
 using Content.Server.Popups;
-using Content.Server.Stack;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Botany;
@@ -16,7 +15,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Random;
-using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -30,9 +28,6 @@ using Content.Shared.Database;
 using Content.Shared.Labels.Components;
 using Content.Shared._NF.BindToStation; // Frontier
 using Content.Server.Station.Systems; // Frontier
-using Robust.Shared.Configuration;
-using Robust.Shared.Player;
-using Robust.Shared;
 
 namespace Content.Server.Botany.Systems;
 
@@ -53,10 +48,6 @@ public sealed class PlantHolderSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly StationSystem _station = default!; // Frontier
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-
 
     public const float HydroponicsSpeedMultiplier = 1f;
     public const float HydroponicsConsumptionMultiplier = 2f;
@@ -82,30 +73,10 @@ public sealed class PlantHolderSystem : EntitySystem
         {
             if (plantHolder.NextUpdate > _gameTiming.CurTime)
                 continue;
-
-            if (!HasPlayerInRange(uid))
-            {
-                plantHolder.NextUpdate = _gameTiming.CurTime + plantHolder.UpdateDelay;
-                continue;
-            }
-
             plantHolder.NextUpdate = _gameTiming.CurTime + plantHolder.UpdateDelay;
 
             Update(uid, plantHolder);
         }
-    }
-
-    private bool HasPlayerInRange(EntityUid uid)
-    {
-        var range = _cfg.GetCVar(CVars.NetMaxUpdateRange);
-        var coords = Transform(uid).Coordinates;
-
-        foreach (var _ in _lookup.GetEntitiesInRange<ActorComponent>(coords, range))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private int GetCurrentGrowthStage(Entity<PlantHolderComponent> entity)
@@ -211,7 +182,7 @@ public sealed class PlantHolderSystem : EntitySystem
                 if (TryComp(args.Used, out ExtractedSeedOwnerComponent? ownerComp))
                 {
                     // Compare the player's NetUserId from their ActorComponent with the stored owner
-                    if (!TryComp<Robust.Shared.Player.ActorComponent>(args.User, out var actor) || ownerComp.Owner != actor.PlayerSession.UserId)
+                    if (!TryComp<ActorComponent>(args.User, out var actor) || ownerComp.Owner != actor.PlayerSession.UserId)
                     {
                         _popup.PopupCursor(Loc.GetString("plant-holder-component-seed-not-yours"),
                             args.User, PopupType.MediumCaution);
@@ -254,19 +225,11 @@ public sealed class PlantHolderSystem : EntitySystem
                 }
                 component.LastCycle = _gameTiming.CurTime;
 
-                if (TryComp<StackComponent>(args.Used, out var stack) && stack.Count > 1)
+                if (TryComp<PaperLabelComponent>(args.Used, out var paperLabel))
                 {
-                    _stack.SetCount(args.Used, stack.Count - 1, stack);
+                    _itemSlots.TryEjectToHands(args.Used, paperLabel.LabelSlot, args.User);
                 }
-                else
-                {
-                    if (TryComp<PaperLabelComponent>(args.Used, out var paperLabel))
-                    {
-                        _itemSlots.TryEjectToHands(args.Used, paperLabel.LabelSlot, args.User);
-                    }
-
-                    QueueDel(args.Used);
-                }
+                QueueDel(args.Used);
 
                 CheckLevelSanity(uid, component);
                 UpdateSprite(uid, component);
@@ -291,7 +254,7 @@ public sealed class PlantHolderSystem : EntitySystem
                 _popup.PopupCursor(Loc.GetString("plant-holder-component-remove-weeds-message",
                     ("name", Comp<MetaDataComponent>(uid).EntityName)), args.User, PopupType.Medium);
                 _popup.PopupEntity(Loc.GetString("plant-holder-component-remove-weeds-others-message",
-                    ("otherName", Comp<MetaDataComponent>(args.User).EntityName)), uid, Robust.Shared.Player.Filter.PvsExcept(args.User), true);
+                    ("otherName", Comp<MetaDataComponent>(args.User).EntityName)), uid, Filter.PvsExcept(args.User), true);
                 component.WeedLevel = 0;
                 UpdateSprite(uid, component);
             }
@@ -311,7 +274,7 @@ public sealed class PlantHolderSystem : EntitySystem
                 _popup.PopupCursor(Loc.GetString("plant-holder-component-remove-plant-message",
                     ("name", Comp<MetaDataComponent>(uid).EntityName)), args.User, PopupType.Medium);
                 _popup.PopupEntity(Loc.GetString("plant-holder-component-remove-plant-others-message",
-                    ("name", Comp<MetaDataComponent>(args.User).EntityName)), uid, Robust.Shared.Player.Filter.PvsExcept(args.User), true);
+                    ("name", Comp<MetaDataComponent>(args.User).EntityName)), uid, Filter.PvsExcept(args.User), true);
                 RemovePlant(uid, component);
             }
             else
@@ -404,7 +367,7 @@ public sealed class PlantHolderSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("plant-holder-component-compost-others-message",
                 ("user", Identity.Entity(args.User, EntityManager)),
                 ("usingItem", args.Used),
-                ("owner", uid)), uid, Robust.Shared.Player.Filter.PvsExcept(args.User), true);
+                ("owner", uid)), uid, Filter.PvsExcept(args.User), true);
 
             if (_solutionContainerSystem.TryGetSolution(args.Used, produce.SolutionName, out var soln2, out var solution2))
             {

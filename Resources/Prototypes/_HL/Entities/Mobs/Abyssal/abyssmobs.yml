@@ -1,6 +1,6 @@
 - type: entity
   parent: [ MobDragonDungeon ]
-  id: MobDragonAlloren
+  id: Alloren
   suffix: ""
   name: Alloren
   description: A demon from the abyss.

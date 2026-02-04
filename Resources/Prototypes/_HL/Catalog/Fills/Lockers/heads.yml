@@ -287,7 +287,6 @@
     - id: CargoRequestScienceComputerCircuitboard
     - id: RubberStampRd
     - id: RDIDCard
-    - id: StationAiFixerCircuitboard
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

@@ -78,8 +78,6 @@ public sealed partial class StationJobsSystem : EntitySystem
 
         stationJobs.TotalJobs = stationJobs.JobList.Values.Select(x => x ?? 0).Sum();
 
-        ApplyActiveRoleCountsToJobList(stationJobs);
-
         UpdateJobsAvailable();
     }
 

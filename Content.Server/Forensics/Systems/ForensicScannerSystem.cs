@@ -73,7 +73,7 @@ namespace Content.Server.Forensics
 
         private static readonly ProtoId<TagPrototype> DNASolutionScannableTag = "DNASolutionScannable";
         private static readonly ProtoId<StackPrototype> FrontierUplinkCoinId = "FrontierUplinkCoin";
-        private static readonly ProtoId<RadioChannelPrototype> ColSecChannelId = "ColSec";  // HardLight
+        private static readonly ProtoId<RadioChannelPrototype> NfsdChannelId = "Nfsd";
 
         public override void Initialize()
         {
@@ -129,7 +129,7 @@ namespace Content.Server.Forensics
             else
                 fucAmount = 0;
 
-            var channel = _prototypeManager.Index<RadioChannelPrototype>(ColSecChannelId);
+            var channel = _prototypeManager.Index<RadioChannelPrototype>(NfsdChannelId);
             string msgString = Loc.GetString(msg);
             if (fucAmount >= 1)
             {

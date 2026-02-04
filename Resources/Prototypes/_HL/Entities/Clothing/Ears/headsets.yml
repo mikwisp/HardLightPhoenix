@@ -4,14 +4,11 @@
   name: cartel headset
   description: A headset used by cartel operatives for secure communications.
   components:
-  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
-  - type: ActiveRadio
-    intrinsicChannels:
-    - Cartel
-  - type: EncryptionKeyHolder
-    intrinsicChannels:
-    - Cartel
-  # HardLight end
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCartel
+      - EncryptionKeyCommon
   - type: Sprite
     sprite: _HL/Clothing/Ears/Headsets/cartel.rsi
   - type: Clothing

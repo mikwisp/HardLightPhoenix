@@ -1,56 +1,50 @@
 - type: trait
   id: Leadfooted
-  name: lead-footed-name
-  description: lead-footed-text
+  name: Lead-footed-name
+  description: Lead-footed-text
   category: Physical
   cost: 3
   components:
   - type: FTLKnockdownImmune
 
 - type: trait
-  id: Inoculated
-  name: inoculated-name
-  description: inoculated-text
+  id: Innoculated
+  name: Innoculated
+  description: Innoculated-text
   category: Physical
   cost: 5
-  speciesBlacklist:
-  - IPC
-  - Synth
-  blacklist:
-    components:
-    - BorgChassis
   components:
   - type: ZombieImmune
 
 - type: trait
-  id: Insulated
-  name: insulated-name
-  description: insulated-text
+  id: insulated
+  name: Insulated
+  description: Insulated-text
   category: Physical
   cost: 10
   speciesBlacklist:
   - IPC
   mutuallyExclusiveTraits:
-  - Heatresistant
-  - Radproof
-  - SnakeEater
-  - Cryoresistant
+  - heatresistant
+  - radproof
+  - snakeeater
+  - cryoresistant
   components:
   - type: Insulated
 
 - type: trait
-  id: Heatresistant
-  name: heat-resistant-name
-  description: heat-resistant-text
+  id: heatresistant
+  name: heatresistant
+  description: heatresistant-text
   category: Physical
   cost: 10
   speciesBlacklist:
   - IPC
   mutuallyExclusiveTraits:
-  - Insulated
-  - Radproof
-  - SnakeEater
-  - Cryoresistant
+  - insulated
+  - radproof
+  - snakeeater
+  - cryoresistant
   components:
   - type: FireproofBodyParts
   - type: DamageProtectionBuff
@@ -63,18 +57,18 @@
     reduction: 0
 
 - type: trait
-  id: Radproof
-  name: radproof-name
+  id: radproof
+  name: radproof
   description: radproof-text
   category: Physical
   cost: 10
   speciesBlacklist:
   - IPC
   mutuallyExclusiveTraits:
-  - Insulated
-  - Heatresistant
-  - SnakeEater
-  - Cryoresistant
+  - insulated
+  - heatresistant
+  - snakeeater
+  - cryoresistant
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -84,18 +78,18 @@
           Radiation: 0.01
 
 - type: trait
-  id: SnakeEater
-  name: snake-eater-name
-  description: snake-eater-text
+  id: snakeeater
+  name: snakeeater
+  description: snakeeater-text
   category: Physical
   cost: 10
   speciesBlacklist:
   - IPC
   mutuallyExclusiveTraits:
-  - Insulated
-  - Heatresistant
-  - Radproof
-  - Cryoresistant
+  - insulated
+  - heatresistant
+  - radproof
+  - cryoresistant
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -105,18 +99,18 @@
           Poison: 0.01
 
 - type: trait
-  id: Cryoresistant
-  name: cryo-resistant-name
-  description: cryo-resistant-text
+  id: cryoresistant
+  name: cryo-resistant
+  description: Cryo-resistant-text
   category: Physical
   cost: 8
   speciesBlacklist:
   - IPC
   mutuallyExclusiveTraits:
-  - Heatresistant
-  - Insulated
-  - SnakeEater
-  - Radproof
+  - heatresistant
+  - insulated
+  - snakeeater
+  - radproof
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -127,16 +121,10 @@
 
 - type: trait
   id: NaturalRegen
-  name: natural-regen-name
-  description: natural-regen-text
+  name: natural-regeneration-name
+  description: natural-regeneration-text
   category: Physical
   cost: 6
-  speciesBlacklist:
-  - IPC
-  - Synth
-  blacklist:
-    components:
-    - BorgChassis
   mutuallyExclusiveTraits:
   - PlateletFactories
   - Hemophilia
@@ -154,16 +142,10 @@
 
 - type: trait
   id: UnnaturalRegen
-  name: unnatural-regen-name
-  description: unnatural-regen-text
+  name: unnatural-regeneration-name
+  description: unnatural-regeneration-text
   category: Physical
   cost: 8
-  speciesBlacklist:
-  - IPC
-  - Synth
-  blacklist:
-    components:
-    - BorgChassis
   mutuallyExclusiveTraits:
   - PlateletFactories
   - NaturalRegen

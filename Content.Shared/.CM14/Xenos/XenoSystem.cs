@@ -57,11 +57,7 @@ public sealed class XenoSystem : EntitySystem
             // - Secrete Structure: ensure it is a world target action raised on user as well.
             if (ent.Comp.Actions.TryGetValue("ActionXenoPlantWeeds", out var weedsAction))
             {
-                if (!ent.Comp.AllowPlantWeeds)
-                {
-                    _action.SetEnabled(weedsAction, false);
-                }
-                else if (TryComp<InstantActionComponent>(weedsAction, out var instant))
+                if (TryComp<InstantActionComponent>(weedsAction, out var instant))
                 {
                     instant.Event ??= new XenoPlantWeedsEvent();
                     instant.RaiseOnUser = true;
@@ -302,9 +298,6 @@ public sealed class XenoSystem : EntitySystem
                 //Log.Debug($"[Xeno] Transferred mind {mindId} to evolution {ToPrettyString(evolution)} from {ToPrettyString(ent)}");
             }
 
-            var evolvedEvent = new XenoEvolvedEvent(ent.Owner, evolution);
-            RaiseLocalEvent(evolution, evolvedEvent);
-
             Del(ent.Owner);
             //Log.Debug($"[Xeno] Deleted original xeno {ToPrettyString(ent)} after evolution");
         }
@@ -333,8 +326,6 @@ public sealed class XenoSystem : EntitySystem
         var evolution = Spawn(ent.Comp.EvolvesTo[args.Choice], _transform.GetMoverCoordinates(ent.Owner));
         _mind.TransferTo(mindId, evolution);
         _mind.UnVisit(mindId);
-        var evolvedEvent = new XenoEvolvedEvent(ent.Owner, evolution);
-        RaiseLocalEvent(evolution, evolvedEvent);
         Del(ent.Owner);
 
         if (TryComp(ent, out ActorComponent? actor))

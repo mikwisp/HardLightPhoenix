@@ -9,7 +9,6 @@
     - GrenadeRiotGun
   - type: CartridgeAmmo
     proto: Bullet40mmGrenadeFlash
-    deleteOnSpawn: true
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
@@ -26,7 +25,6 @@
   components:
   - type: CartridgeAmmo
     proto: BulletRiotGunTearGas
-    deleteOnSpawn: true
 
 - type: entity
   id: GrenadeRiotStinger
@@ -35,4 +33,3 @@
   components:
   - type: CartridgeAmmo
     proto: BulletRiotGunStinger
-    deleteOnSpawn: true

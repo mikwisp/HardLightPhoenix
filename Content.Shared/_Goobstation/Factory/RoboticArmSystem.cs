@@ -14,9 +14,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
-using Robust.Shared.Configuration;
-using Robust.Shared.Player;
-using Robust.Shared;
 
 namespace Content.Shared._Goobstation.Factory;
 
@@ -34,13 +31,11 @@ public sealed class RoboticArmSystem : EntitySystem
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<ThrownItemComponent> _thrownQuery;
     private TimeSpan _nextUpdate = TimeSpan.Zero;
-    private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(0.5);
 
     public override void Initialize()
     {
@@ -72,9 +67,6 @@ public sealed class RoboticArmSystem : EntitySystem
         var query = EntityQueryEnumerator<RoboticArmComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!HasPlayerInRange(uid))
-                continue;
-
             if (!_power.IsPowered(uid))
                 continue;
 
@@ -97,19 +89,6 @@ public sealed class RoboticArmSystem : EntitySystem
                 StartMoving(ent);
             }
         }
-    }
-
-    private bool HasPlayerInRange(EntityUid uid)
-    {
-        var range = _cfg.GetCVar(CVars.NetMaxUpdateRange);
-        var coords = Transform(uid).Coordinates;
-
-        foreach (var _ in _lookup.GetEntitiesInRange<ActorComponent>(coords, range))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private void OnInit(Entity<RoboticArmComponent> ent, ref ComponentInit args)
